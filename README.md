@@ -137,19 +137,3 @@ Many wallets accumulate **unused token accounts** with dust-like SOL locked for 
 - Recommended: on-chain audits and fuzz tests prior to mainnet deployment.
 
 ---
-
-## 🔧 Quickstart (Developer)
-
-```bash
-# Build (example)
-anchor build
-
-# Run tests
-anchor test
-
-# Deploy (example)
-anchor deploy --provider.cluster mainnet
-
-# Interact via Anchor client (JS / TS)
-# - Use Anchor IDL
-# - Call `claim()` with prepared account list & optional affiliate
