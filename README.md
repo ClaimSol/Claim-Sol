@@ -6,8 +6,7 @@ Designed for security, scale, and gas efficiency.
 
 ---
 
-## ✨ Hero Features (Big & Bold)
-
+## ✨ Hero Features 
 - **On-Chain Bulk Recovery** — Reclaim SOL from up to **25 accounts** in a single transaction (gas-optimized).
 - **Automatic Reward + Burn** — Each successful claim issues `$CLAIM` rewards, burns supply for deflation, and distributes developer/affiliate fees — all on-chain.
 - **Built-in Affiliate System** — Transparent 4% affiliate payouts via zero-copy PDAs.
