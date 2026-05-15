@@ -1,0 +1,24 @@
+[package]
+name = "claim-sol"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "claim_sol"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = "0.29.0"
+anchor-spl = "0.29.0"
+spl-token = { version = "4.0.0", features = ["no-entrypoint"] }
+spl-token-2022 = { version = "0.9.0", features = ["no-entrypoint"] }
+solana-security-txt = "1.1.2"
+blake3 = "1.4.1"  # Pin to force constant_time_eq 0.3.0

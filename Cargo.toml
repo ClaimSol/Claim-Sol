@@ -1,0 +1,9 @@
+[package]
+name = "claim-sol-workspace"
+version = "0.0.0"
+edition = "2021"
+
+[lib]
+name = "dummy"
+path = "dummy.rs"
+

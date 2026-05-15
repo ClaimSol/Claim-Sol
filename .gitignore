@@ -1,0 +1,45 @@
+# Build output
+target/
+**/*.rs.bk
+
+# Anchor / Solana artifacts
+.anchor/
+.idea/
+.vscode/
+.DS_Store
+
+# Keypairs / wallets — NEVER commit
+*.json
+**/wallets/
+**/Wallets/
+**/keypairs/
+*-keypair.json
+program-keypair.json
+dev-wallet-keypair.json
+rewards-keypair.json
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Node — should never appear here, but defensive
+node_modules/
+dist/
+build/
+*.log
+
+# Operational data — should never appear here, but defensive
+**/Wallets/
+**/Scripts/
+**/affiliates_full_list.*
+**/*_drop_*.csv
+**/*_drop_*.json
+**/revenue_report.json
+**/dev_revenue_report.json
+
+# OS
+Thumbs.db
+ehthumbs.db
