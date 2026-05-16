@@ -58,22 +58,52 @@ The program is built and verified via [`solana-verify`](https://github.com/Ellip
 # One-time install
 cargo install solana-verify
 
-# Build inside the pinned Docker image
-solana-verify build --library-name claim_sol
+# Build inside the pinned Docker image. The --base-image flag pins the exact
+# Docker image; needed because the workspace Cargo.toml omits
+# [workspace.metadata.cli], so solana-verify can't auto-resolve the version.
+solana-verify build \
+  --library-name claim_sol \
+  --base-image solanafoundation/solana-verifiable-build:1.18.26
 
 # Compare hashes — these must match
 solana-verify get-executable-hash target/deploy/claim_sol.so
 solana-verify get-program-hash CLaim2U9C1AYg1APkb16PdxFVgeqSwzT9HDVESHhAxTt
 ```
 
-To submit the verification to OtterSec / the public Solana verified-builds registry:
+The expected hash for the current on-chain deploy:
+
+```
+d1d6a335bfa72c5d96695549bb04f5955c4083ff87a6043de0e7de55e2d177f1
+```
+
+### Submit verification to the OtterSec registry
+
+`solana-verify`'s `--remote` flag is **deprecated** as of v0.4.15. The current
+flow is two commands — first upload the verify-args PDA signed by the program
+upgrade authority, then queue the OtterSec worker to reproduce the build.
 
 ```bash
+# 1. Upload the verify-args PDA (signed by the program upgrade authority).
 solana-verify verify-from-repo https://github.com/ClaimSol/Claim-Sol \
   --program-id CLaim2U9C1AYg1APkb16PdxFVgeqSwzT9HDVESHhAxTt \
   --library-name claim_sol \
-  --remote
+  --commit-hash <commit> \
+  --base-image solanafoundation/solana-verifiable-build:1.18.26 \
+  --skip-build \
+  -k <path-to-upgrade-authority-keypair> \
+  -y
+
+# 2. Queue the OtterSec remote worker to reproduce the build + write the
+#    on-chain attestation. The --uploader is the upgrade-authority pubkey
+#    used to sign step 1.
+solana-verify remote submit-job \
+  --program-id CLaim2U9C1AYg1APkb16PdxFVgeqSwzT9HDVESHhAxTt \
+  --uploader <upgrade-authority-pubkey>
 ```
+
+When the worker finishes, verification status is visible at
+<https://verify.osec.io/status/CLaim2U9C1AYg1APkb16PdxFVgeqSwzT9HDVESHhAxTt>
+and the "Verified Build" badge appears on Solscan.
 
 ## Upgrade authority
 
