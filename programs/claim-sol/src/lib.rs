@@ -9,6 +9,18 @@ use anchor_spl::token_interface::{
 use spl_token_2022::extension::StateWithExtensions;  
 use spl_token_2022::state::Account as Token2022Account;  
   
+#[cfg(not(feature = "no-entrypoint"))]
+solana_security_txt::security_txt! {
+    name: "Claim SOL",
+    project_url: "https://claimsol.pro",
+    contacts: "email:info@claimsol.pro,twitter:@ClaimSol_",
+    policy: "https://claimsol.pro/license",
+    preferred_languages: "en",
+    source_code: "https://github.com/ClaimSol/Claim-Sol",
+    source_release: "v1.0.0",
+    auditors: "None"
+}
+
 declare_id!("CLaim2U9C1AYg1APkb16PdxFVgeqSwzT9HDVESHhAxTt");
 
 pub const AIRDROP_AUTHORITY_SEED: &[u8] = b"airdrop_authority";
