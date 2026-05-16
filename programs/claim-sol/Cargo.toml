@@ -24,3 +24,4 @@ spl-token = { version = "4.0.0", features = ["no-entrypoint"] }
 spl-token-2022 = { version = "0.9.0", features = ["no-entrypoint"] }
 solana-security-txt = "1.1.2"
 blake3 = "=1.4.1"  # Pin exactly — newer blake3 pulls in digest 0.11 + hybrid-array which require edition 2024
+bytemuck = { version = "1.13", features = ["derive"] }  # required by Anchor 0.29's #[account(zero_copy)] macro
